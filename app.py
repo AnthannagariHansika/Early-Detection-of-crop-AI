@@ -1,6 +1,12 @@
 import sqlite3
+
 import pyttsx3
-import winsound
+
+try:
+    import winsound
+except ImportError:
+    winsound = None
+
 import hashlib
 import streamlit as st
 from ultralytics import YOLO
@@ -20,13 +26,18 @@ st.set_page_config(
     layout="wide"
 )
 
+
 def play_buzzer():
-    try:
-        winsound.Beep(1000, 700)
-        winsound.Beep(1300, 700)
-        winsound.Beep(1000, 700)
-    except Exception as e:
-        st.warning(f"Buzzer could not play: {e}")
+    if winsound is not None:
+        try:
+            winsound.Beep(1000, 700)
+            winsound.Beep(1300, 700)
+            winsound.Beep(1000, 700)
+        except Exception as e:
+            st.warning(f"Buzzer could not play: {e}")
+    else:
+        st.info("Cloud mode: physical buzzer requires IoT hardware.")
+
 
 # ============================================================
 # FARMER REGISTRATION
