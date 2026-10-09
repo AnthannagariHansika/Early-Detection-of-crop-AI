@@ -5,3 +5,5 @@ pillow
 pyttsx3
 folium
 streamlit-folium
+opencv-python-headless
+twilio
