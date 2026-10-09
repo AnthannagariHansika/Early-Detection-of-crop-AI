@@ -1,0 +1,7 @@
+
+streamlit
+ultralytics
+pillow
+pyttsx3
+folium
+streamlit-folium
