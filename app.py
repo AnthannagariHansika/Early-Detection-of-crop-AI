@@ -213,15 +213,25 @@ st.write(
 )
 
 
+
 # ============================================================
 # LOAD AI MODEL
 # ============================================================
 
+from pathlib import Path
+
 @st.cache_resource
 def load_model():
-    return YOLO(
-        "runs/classify/tomato_disease_model/weights/best.pt"
-    )
+    model_path = Path(__file__).parent / "best.pt"
+
+    if not model_path.exists():
+        st.error(
+            "Trained AI model not found. "
+            "Please upload best.pt to your GitHub repository."
+        )
+        st.stop()
+
+    return YOLO(str(model_path))
 
 
 model = load_model()
